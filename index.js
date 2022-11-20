@@ -51,7 +51,7 @@ client.on('interactionCreate', async interaction => {
 		if(server) {
 			const serverEmbed = new EmbedBuilder()
 							.setColor(0x00cc75)
-							.setTitle(server.name)
+							.setTitle(server.name + server.passphrase)
 							.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
 							.addFields(
 								{ name: 'Name', 	   value: server.name 							},
@@ -69,7 +69,7 @@ client.on('interactionCreate', async interaction => {
 						.setURL(makeInviteUrl(server))
 				);
 		
-			server.announce = await interaction.channel.send({ 	
+			server.announce = await interaction.reply({ 	
 				content: '<@' + interaction.user.id + '> is hosting a server!',
 				embeds: [ serverEmbed ],
 				components: [ row ]
@@ -93,8 +93,24 @@ client.on('interactionCreate', async interaction => {
 											  embeds: [ waitEmbed ],
 											  ephemeral: true
 											});
+		
+		let pPassword = interaction.options.get('password');
+		let pMaxPlayers = interaction.options.get('max_players');
+		
+		let player_max = 4;
+		if(pMaxPlayers) {
+			player_max = pMaxPlayers.value;
+		}
+		if(player_max > 20) {
+			player_max = 20;
+		}
+		
+		let passphrase = undefined;
+		if(pPassword) {
+			passphrase = pPassword.value.replaceAll(" ", "");
+		}
 								
-		var server = await StartServer(interaction.user);
+		var server = await StartServer(interaction.user, player_max, passphrase);
 		
 		if(server) {
 			server.interaction = interaction;
@@ -125,6 +141,7 @@ client.on('interactionCreate', async interaction => {
 									{ name: 'Address', 	   value: '' + server.address, 	   inline: true },
 									{ name: "Port", 	   value: '' + server.port, 	   inline: true },
 									{ name: "Max-Players", value: '' + server.max_players, inline: true },
+									{ name: "Password",    value: '' + (server.passphrase ? "✅" : "❎"), inline: true },
 								)
 								.setTimestamp();
 			
@@ -149,7 +166,8 @@ client.on('interactionCreate', async interaction => {
 			var i = 0;
 			Object.keys(servers).forEach(function(port) {
 				if(i >= 10) return;
-				serverStr += servers[port].address + ":" + servers[port].port + " - " + servers[port].name + "\n";
+				serverStr += servers[port].address + ":" + servers[port].port
+						   + " - " + servers[port].name + servers[port].passphrase + "\n";
 				i++;
 			});
 			
@@ -226,7 +244,7 @@ function makeInviteUrl(server) {
 	
 	return serverlistUrl + 
 		   "?key=" + btoa(encodeURI(server.address) + ":" + encodeURI(server.port)) +
-		   "&name=" + encodeURI(server.name);
+		   "&name=" + encodeURI(server.name) + "&require_password=" + (server.passphrase ? "1" : "0");
 }
 
 client.login(token);
