@@ -19,6 +19,8 @@ function randomRange(min, max) {
 
 module.exports.StartServer = async function(user) {
 	
+	var max_players = 10;
+	
 	var server_running = module.exports.FindServer(user.id);
 	if(server_running) {
 		if(!pidIsRunning(server_running.process.pid)) {
@@ -63,7 +65,7 @@ module.exports.StartServer = async function(user) {
 	  [
 		'AMP_Server.exe',
 		use_port,
-		'10'
+		max_players
 	  ], {
 		cwd: './serverfiles/',
 		//stdio: ['inherit', 'inherit', 'inherit']
@@ -71,12 +73,13 @@ module.exports.StartServer = async function(user) {
 	);
 	
 	var entry = {
-		id:	     user.id,
-		name: 	 user.username + "'s Lobby",
-		address: address,
-		port:	 use_port,
-		started: new Date(),
-		process: server_proc
+		id:	     	 user.id,
+		name: 	 	 user.username + "'s Lobby",
+		address: 	 address,
+		port:	 	 use_port,
+		max_players: max_players,
+		started: 	 new Date(),
+		process: 	 server_proc
 	};
 	
 	serverlist[use_port] = entry;
@@ -132,6 +135,22 @@ module.exports.FindServer = function(id) {
 		if(serverlist[port].id == id) found = serverlist[port];
 	});
 	return found;
+}
+
+module.exports.CleanServers = function() {
+	let cleaned = 0;
+	Object.keys(serverlist).forEach(port => {
+		let server = serverlist[port];
+		
+		if(!pidIsRunning(server.process.pid)) {
+			if(serverlist.hasOwnProperty(server.port)) {
+				delete serverlist[server.port];
+			}
+			console.log("Server died - " + server.name + " (" + server.address + ")");
+			cleaned++;
+		}
+	});
+	return cleaned;
 }
 
 function pidIsRunning(pid) {
