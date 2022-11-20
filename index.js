@@ -157,9 +157,12 @@ client.on('interactionCreate', async interaction => {
 											embeds: []
 											});
 		}
-	}
-	
-	if(interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+		
+		
+		
+		
+		
+	}else if(interaction.member && interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
 		if (interaction.commandName === 'serverlist') {
 			
 			var serverStr = "";
@@ -249,6 +252,6 @@ function makeInviteUrl(server) {
 
 client.login(token);
 
-process.on('uncaughtException', function(err) {
-	console.log('Caught exception: ' + err);
+process.on('uncaughtException', function(error) {
+	console.log('Caught exception: ' + error);
 });
