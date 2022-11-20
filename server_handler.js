@@ -13,6 +13,10 @@ function sleep(ms) {
   });
 }
 
+function randomRange(min, max) {
+  return Math.round(Math.random() * (max - min) + min);
+}
+
 module.exports.StartServer = async function(user) {
 	
 	var server_running = module.exports.FindServer(user.id);
@@ -32,22 +36,33 @@ module.exports.StartServer = async function(user) {
 		}
 	}
 	
-	
-	for(var free_port = portStart; free_port <= portEnd; free_port++) {
-		if(!serverlist[free_port]) {
+	var use_port = -1;
+	for(var try_count = 0; try_count < 10; try_count++) {
+		var port = randomRange(portStart, portEnd);
+		if(!serverlist[port]) {
+			use_port = port;
 			break;
 		}
 	}
-	if(free_port == portEnd) {
-		return undefined;
+	
+	if(use_port < 0) {
+		for(var free_port = portStart; free_port <= portEnd; free_port++) {
+			if(!serverlist[free_port]) {
+				use_port = free_port;
+				break;
+			}
+		}
+		if(use_port == portEnd) {
+			return undefined;
+		}
 	}
 	
-	console.log("Starting server on port " + free_port + " for " + user.username);
+	console.log("Starting server on port " + use_port + " for " + user.username);
 	const server_proc = spawn(
 	  'mono',
 	  [
 		'AMP_Server.exe',
-		free_port,
+		use_port,
 		'10'
 	  ], {
 		cwd: './serverfiles/',
@@ -59,12 +74,12 @@ module.exports.StartServer = async function(user) {
 		id:	     user.id,
 		name: 	 user.username + "'s Lobby",
 		address: address,
-		port:	 free_port,
+		port:	 use_port,
 		started: new Date(),
 		process: server_proc
 	};
 	
-	serverlist[free_port] = entry;
+	serverlist[use_port] = entry;
 	
 	server_proc.on('close', () => {
 		if(entry.interaction) {
