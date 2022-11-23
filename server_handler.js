@@ -107,6 +107,11 @@ module.exports.StartServer = async function(user, max_players, passphrase) {
 				components: [ ]
 			});
 		}
+		if(serverlist.hasOwnProperty(entry.port)) {
+			delete serverlist[entry.port];
+			
+			console.log("Server \"" + entry.name + "\" closed.");
+		}
 	});
 	
 	return entry;
