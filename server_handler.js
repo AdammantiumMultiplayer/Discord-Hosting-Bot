@@ -86,27 +86,31 @@ module.exports.StartServer = async function(user, max_players, passphrase) {
 	serverlist[use_port] = entry;
 	
 	server_proc.on('close', () => {
-		if(entry.interaction) {
-			entry.interaction.editReply({
-				content: 'Server closed!',
-				ephemeral: true,
-				embeds: [ ],
-				components: [ ]
-			});
-		}
-		if(entry.announce) {
-			const serverEmbed = new EmbedBuilder()
-				.setColor(0x00cc75)
-				.setTitle("Server closed: " + entry.name)
-				.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
-				.setTimestamp();
-			
-			entry.announce.edit({
-				content: 'Server closed.',
-				embeds: [ serverEmbed ],
-				components: [ ]
-			});
-		}
+		try {
+			if(entry.interaction) {
+				entry.interaction.editReply({
+					content: 'Server closed!',
+					ephemeral: true,
+					embeds: [ ],
+					components: [ ]
+				});
+			}
+		}catch{}
+		try {
+			if(entry.announce) {
+				const serverEmbed = new EmbedBuilder()
+					.setColor(0x00cc75)
+					.setTitle("Server closed: " + entry.name)
+					.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+					.setTimestamp();
+				
+				entry.announce.editReply({
+					content: 'Server closed.',
+					embeds: [ serverEmbed ],
+					components: [ ]
+				});
+			}
+		}catch{}
 		if(serverlist.hasOwnProperty(entry.port)) {
 			delete serverlist[entry.port];
 			
