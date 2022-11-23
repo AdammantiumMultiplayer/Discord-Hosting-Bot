@@ -69,7 +69,9 @@ client.on('interactionCreate', async interaction => {
 						.setURL(makeInviteUrl(server))
 				);
 		
-			server.announce = await interaction.reply({ 	
+			server.announce = interaction;
+			
+			await interaction.reply({ 	
 				content: '<@' + interaction.user.id + '> is hosting a server!',
 				embeds: [ serverEmbed ],
 				components: [ row ]
