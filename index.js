@@ -1,5 +1,5 @@
 const { Client, GatewayIntentBits, ActionRowBuilder, SelectMenuBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, PermissionsBitField } = require('discord.js');
-const { token, clientId, serverlistUrl } = require('./config.json');
+const { token, clientId, serverlistUrl, default_version } = require('./config.json');
 const { servers, StartServer, StopServer, FindServer, CleanServers } = require("./server_handler");
 
 require('./commands.js')
@@ -112,7 +112,7 @@ client.on('interactionCreate', async interaction => {
 			passphrase = pPassword.value.replaceAll(" ", "");
 		}
 								
-		var server = await StartServer(interaction.user, player_max, passphrase);
+		var server = await StartServer(interaction.user, player_max, passphrase, default_version);
 		
 		if(server) {
 			server.interaction = interaction;
@@ -148,7 +148,7 @@ client.on('interactionCreate', async interaction => {
 								.setTimestamp();
 			
 			
-			await interaction.editReply({ 	content: 'Okay, server is ready! You have 2 minutes to connect, otherwise the server will get stopped and you have to execute the command again.', 
+			await interaction.editReply({ 	content: 'Okay, server is ready! You have 5 minutes to connect, otherwise the server will get stopped and you have to execute the command again.', 
 											ephemeral: true,
 											embeds: [ serverEmbed ],
 											components: [row]

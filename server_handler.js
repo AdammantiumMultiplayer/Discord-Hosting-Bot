@@ -17,7 +17,7 @@ function randomRange(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-module.exports.StartServer = async function(user, max_players, passphrase) {
+module.exports.StartServer = async function(user, max_players, passphrase, version) {
 	var server_running = module.exports.FindServer(user.id);
 	if(server_running) {
 		if(!pidIsRunning(server_running.process.pid)) {
@@ -62,12 +62,13 @@ module.exports.StartServer = async function(user, max_players, passphrase) {
 	const server_proc = spawn(
 	  'mono',
 	  [
+		'--debug',
 		'AMP_Server.exe',
 		use_port,
 		max_players,
 		passphrase
 	  ], {
-		cwd: './serverfiles/',
+		cwd: './serverfiles/' + version + "/",
 		//stdio: ['inherit', 'inherit', 'inherit']
 	  }
 	);
