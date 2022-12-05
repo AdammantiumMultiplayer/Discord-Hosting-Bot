@@ -1,5 +1,5 @@
 const { REST, Routes, SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
-const { token, clientId } = require('./config.json');
+const { token, clientId, default_version } = require('./config.json');
 
 const commands = [
 	new SlashCommandBuilder().setName('host').setDescription('Creates a server for you and your friends to connect to.')
@@ -12,7 +12,16 @@ const commands = [
 			option.setName("max_players")
 				.setDescription("Specify a max amount for players. (Default: 4)")
 				.setRequired(false)
-		),
+		)
+		.addStringOption(option =>
+			option.setName('version')
+				.setDescription('Version for the server to start. (Default: ' + default_version + ')')
+				.setRequired(false)
+				.addChoices(
+					{ name: '0.6.0', value: '0.6.0' },
+				)
+		)
+		,
 	
 	new SlashCommandBuilder().setName('invite').setDescription('Invite others to join your server.'),
 	
