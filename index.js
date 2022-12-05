@@ -58,6 +58,7 @@ client.on('interactionCreate', async interaction => {
 								{ name: 'Address', 	   value: '' + server.address,	   inline: true },
 								{ name: "Port", 	   value: '' + server.port, 	   inline: true },
 								{ name: "Max-Players", value: '' + server.max_players, inline: true },
+								{ name: "Version",     value: '' + server.version,   inline: true },
 							)
 							.setTimestamp();
 		
@@ -68,6 +69,12 @@ client.on('interactionCreate', async interaction => {
 						.setStyle(ButtonStyle.Link)
 						.setURL(makeInviteUrl(server))
 				);
+		
+			if(server.announce) {
+				try {
+					server.announce.deleteReply();
+				} catch {}
+			}
 		
 			server.announce = interaction;
 			
@@ -96,8 +103,14 @@ client.on('interactionCreate', async interaction => {
 											  ephemeral: true
 											});
 		
-		let pPassword = interaction.options.get('password');
+		let pPassword   = interaction.options.get('password');
 		let pMaxPlayers = interaction.options.get('max_players');
+		let pVersion    = interaction.options.get('version');
+		
+		let passphrase = undefined;
+		if(pPassword) {
+			passphrase = pPassword.value.replaceAll(" ", "");
+		}
 		
 		let player_max = 4;
 		if(pMaxPlayers) {
@@ -107,12 +120,12 @@ client.on('interactionCreate', async interaction => {
 			player_max = 20;
 		}
 		
-		let passphrase = undefined;
-		if(pPassword) {
-			passphrase = pPassword.value.replaceAll(" ", "");
+		let selected_version = default_version;
+		if(pVersion) {
+			selected_version = pVersion.value;
 		}
 								
-		var server = await StartServer(interaction.user, player_max, passphrase, default_version);
+		var server = await StartServer(interaction.user, player_max, passphrase, selected_version);
 		
 		if(server) {
 			server.interaction = interaction;
@@ -139,11 +152,12 @@ client.on('interactionCreate', async interaction => {
 								.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
 								.setDescription('A server has been started!')
 								.addFields(
-									{ name: 'Name', 	   value: '' + server.name 						},
-									{ name: 'Address', 	   value: '' + server.address, 	   inline: true },
-									{ name: "Port", 	   value: '' + server.port, 	   inline: true },
-									{ name: "Max-Players", value: '' + server.max_players, inline: true },
+									{ name: 'Name', 	   value: '' + server.name                                     },
+									{ name: 'Address', 	   value: '' + server.address, 	                  inline: true },
+									{ name: "Port", 	   value: '' + server.port, 	                  inline: true },
+									{ name: "Max-Players", value: '' + server.max_players,                inline: true },
 									{ name: "Password",    value: '' + (server.passphrase ? "✅" : "❎"), inline: true },
+									{ name: "Version",     value: '' + server.version,                  inline: true },
 								)
 								.setTimestamp();
 			
@@ -205,6 +219,7 @@ client.on('interactionCreate', async interaction => {
 										{ name: 'Address', 	   value: '' + server.address,	   inline: true },
 										{ name: "Port", 	   value: '' + server.port, 	   inline: true },
 										{ name: "Max-Players", value: '' + server.max_players, inline: true },
+										{ name: "Version",     value: '' + server.version,   inline: true },
 									)
 									.setTimestamp();
 				

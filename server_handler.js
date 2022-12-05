@@ -81,7 +81,8 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		max_players: max_players,
 		started: 	 new Date(),
 		process: 	 server_proc,
-		passphrase:  (passphrase ? "🔒" : "")
+		passphrase:  (passphrase ? "🔒" : ""),
+		version:	 version,
 	};
 	
 	serverlist[use_port] = entry;
