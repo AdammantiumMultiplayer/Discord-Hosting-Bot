@@ -59,7 +59,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	if(!passphrase) passphrase = "";
 	
 	console.log("Starting server on port " + use_port + " for " + user.username);
-	const server_proc = spawn(
+	const server_proc = execFile(
 		'mono',
 		[
 			'--debug',
