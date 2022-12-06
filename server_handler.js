@@ -60,17 +60,18 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	
 	console.log("Starting server on port " + use_port + " for " + user.username);
 	const server_proc = spawn(
-	  'mono',
-	  [
-		'--debug',
-		'AMP_Server.exe',
-		use_port,
-		max_players,
-		passphrase
-	  ], {
-		cwd: './serverfiles/' + version + "/",
-		//stdio: ['inherit', 'inherit', 'inherit']
-	  }
+		'mono',
+		[
+			'--debug',
+			'AMP_Server.exe',
+			use_port,
+			max_players,
+			passphrase
+		], {
+			detached: true,
+			cwd: './serverfiles/' + version + "/",
+			//stdio: ['inherit', 'inherit', 'inherit']
+		}
 	);
 	
 	var entry = {
@@ -119,6 +120,8 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 			console.log("Server \"" + entry.name + "\" closed.");
 		}
 	});
+	
+	server_proc.unref();
 	
 	return entry;
 };
