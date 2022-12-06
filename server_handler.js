@@ -1,5 +1,5 @@
 const { address, portStart, portEnd } = require('./config.json');
-const { spawn } = require('node:child_process');
+const { spawn, execFile } = require('node:child_process');
 const { EmbedBuilder } = require('discord.js');
 
 
@@ -68,7 +68,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 			max_players,
 			passphrase
 		], {
-			detached: true,
+			//detached: true,
 			cwd: './serverfiles/' + version + "/",
 			//stdio: ['inherit', 'inherit', 'inherit']
 		}
@@ -121,7 +121,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		}
 	});
 	
-	server_proc.unref();
+	//server_proc.unref();
 	
 	return entry;
 };
