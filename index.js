@@ -16,7 +16,7 @@ client.on('ready', () => {
 const waitEmbed = new EmbedBuilder()
 						.setColor(0x00cc75)
 						.setTitle('Starting a server...')
-						.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+						.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
 						.setDescription('A new server for you to play on is starting up, please wait...')
 						.setTimestamp();
 
@@ -52,7 +52,7 @@ client.on('interactionCreate', async interaction => {
 			const serverEmbed = new EmbedBuilder()
 							.setColor(0x00cc75)
 							.setTitle(server.name + server.passphrase)
-							.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+							.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
 							.addFields(
 								{ name: 'Name', 	   value: server.name 							},
 								{ name: 'Address', 	   value: '' + server.address,	   inline: true },
@@ -149,7 +149,7 @@ client.on('interactionCreate', async interaction => {
 			const serverEmbed = new EmbedBuilder()
 								.setColor(0x00cc75)
 								.setTitle('Server started')
-								.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+								.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
 								.setDescription('A server has been started!')
 								.addFields(
 									{ name: 'Name', 	   value: '' + server.name                                     },
@@ -195,7 +195,7 @@ client.on('interactionCreate', async interaction => {
 			var serverListEmbed = new EmbedBuilder()
 					.setColor(0x00cc75)
 					.setTitle("Running Servers")
-					.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+					.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
 					.addFields(
 						{ name: 'Status:', value: '**Currently Running: **' + Object.keys(servers).length },
 						{ name: 'Servers', value: '```' + serverStr + '```'},
@@ -214,7 +214,7 @@ client.on('interactionCreate', async interaction => {
 				const serverEmbed = new EmbedBuilder()
 									.setColor(0x00cc75)
 									.setTitle(server.name)
-									.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
+									.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
 									.addFields(
 										{ name: 'Address', 	   value: '' + server.address,	   inline: true },
 										{ name: "Port", 	   value: '' + server.port, 	   inline: true },
