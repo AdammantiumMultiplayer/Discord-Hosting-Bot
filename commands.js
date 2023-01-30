@@ -18,8 +18,8 @@ const commands = [
 				.setDescription('Version for the server to start. (Default: ' + default_version + ')')
 				.setRequired(false)
 				.addChoices(
-					{ name: '0.6.0',           value: '0.6.0' },
-					{ name: '0.6.1 (Preview)', value: '0.6.1' },
+					{ name: '0.6.0 (Outdated)', value: '0.6.0' },
+					{ name: '0.6.1', 			value: '0.6.1' },
 				)
 		)
 		,
