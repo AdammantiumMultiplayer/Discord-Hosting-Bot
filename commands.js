@@ -19,7 +19,8 @@ const commands = [
 				.setRequired(false)
 				.addChoices(
 					{ name: '0.6.0 (Outdated)', value: '0.6.0' },
-					{ name: '0.6.1', 			value: '0.6.1' },
+					{ name: '0.6.1 (Outdated)', value: '0.6.1' },
+					{ name: '0.7.0', 			value: '0.7.0' },
 				)
 		)
 		,
