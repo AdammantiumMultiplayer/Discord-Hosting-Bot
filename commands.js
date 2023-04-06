@@ -22,7 +22,8 @@ const commands = [
 					{ name: '0.6.1 (Outdated)', value: '0.6.1' },
 					{ name: '0.7.0 (Outdated)', value: '0.7.0' },
 					{ name: '0.7.1 (Outdated)', value: '0.7.1' },
-					{ name: '0.7.3', 			value: '0.7.3' },
+					{ name: '0.7.3 (Outdated)', value: '0.7.3' },
+					{ name: '0.7.9', 			value: '0.7.9' },
 				)
 		)
 		,
