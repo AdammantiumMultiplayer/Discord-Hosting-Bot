@@ -25,6 +25,8 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isButton()) return;
   
 	if(interaction.customId == "close_server") {
+		await interaction.deferReply();
+		
 		var server = FindServer(interaction.user);
 		
 		if(server) {
@@ -47,6 +49,8 @@ client.on('interactionCreate', async interaction => {
 			}
 		}
 	} else if(interaction.customId == "announce") {
+		await interaction.deferReply();
+		
 		var server = FindServer(interaction.user);
 		if(server) {
 			const serverEmbed = new EmbedBuilder()
@@ -98,6 +102,8 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'host') {
+		await interaction.deferReply();
+		
 		await interaction.reply({ content: "Okay, i will spin up a new server for you!",
 											  embeds: [ waitEmbed ],
 											  ephemeral: true
@@ -180,6 +186,7 @@ client.on('interactionCreate', async interaction => {
 		
 	}else if(interaction.member && interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
 		if (interaction.commandName === 'serverlist') {
+			await interaction.deferReply();
 			
 			var serverStr = "";
 			var i = 0;
@@ -206,6 +213,8 @@ client.on('interactionCreate', async interaction => {
 				embeds: [ serverListEmbed ]
 			});
 		}else if (interaction.commandName === 'status') {
+			await interaction.deferReply();
+			
 			let port = interaction.options.get('port').value;
 			
 			if(servers[port]) {
@@ -234,6 +243,8 @@ client.on('interactionCreate', async interaction => {
 				});
 			}
 		}else if (interaction.commandName === 'clean') {
+			await interaction.deferReply();
+			
 			let count = CleanServers();
 			
 			await interaction.reply({
@@ -241,6 +252,8 @@ client.on('interactionCreate', async interaction => {
 				ephemeral: true
 			});
 		}else if (interaction.commandName === 'stop') {
+			await interaction.deferReply();
+			
 			let port = interaction.options.get('port').value;
 			
 			if(servers[port]) {
