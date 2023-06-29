@@ -33,19 +33,23 @@ client.on('interactionCreate', async interaction => {
 			await StopServer(interaction.user);
 			
 			if(server.interaction) {
-				await server.interaction.editReply({
+				await server.interaction.deleteReply();
+				/*await server.interaction.editReply({
 					content: 'Server closed!',
 					ephemeral: true,
 					embeds: [ ],
 					components: [ ]
-				});
+				});*/
 			} else {
+				await interaction.deleteReply();
+				/*
 				await interaction.reply({
 					content: 'Server closed!',
 					ephemeral: true,
 					embeds: [ ],
 					components: [ ]
 				});
+				*/
 			}
 		}
 	} else if(interaction.customId == "announce") {
