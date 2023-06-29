@@ -44,8 +44,9 @@ client.on('interactionCreate', async interaction => {
 					embeds: [ ],
 					components: [ ]
 				});*/
-			} else {
-				await interaction.deleteReply();
+			}
+			if(interaction) {
+				await interaction.deferUpdate();
 				/*
 				await interaction.reply({
 					content: 'Server closed!',
