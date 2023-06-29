@@ -32,6 +32,10 @@ client.on('interactionCreate', async interaction => {
 		if(server) {
 			await StopServer(interaction.user);
 			
+			if(server.announce) {
+				server.announce.deleteReply();
+			}
+			
 			if(server.interaction) {
 				await server.interaction.deleteReply();
 				/*await server.interaction.editReply({
