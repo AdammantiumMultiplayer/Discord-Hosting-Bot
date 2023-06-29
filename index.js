@@ -25,7 +25,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isButton()) return;
   
 	if(interaction.customId == "close_server") {
-		await interaction.deferReply();
+		//await interaction.deferReply();
 		
 		var server = FindServer(interaction.user);
 		
@@ -53,7 +53,7 @@ client.on('interactionCreate', async interaction => {
 			}
 		}
 	} else if(interaction.customId == "announce") {
-		await interaction.deferReply();
+		//await interaction.deferReply();
 		
 		var server = FindServer(interaction.user);
 		if(server) {
@@ -106,7 +106,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'host') {
-		await interaction.deferReply();
+		//await interaction.deferReply();
 		
 		await interaction.reply({ content: "Okay, i will spin up a new server for you!",
 											  embeds: [ waitEmbed ],
@@ -190,7 +190,7 @@ client.on('interactionCreate', async interaction => {
 		
 	}else if(interaction.member && interaction.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
 		if (interaction.commandName === 'serverlist') {
-			await interaction.deferReply();
+			//await interaction.deferReply();
 			
 			var serverStr = "";
 			var i = 0;
@@ -217,7 +217,7 @@ client.on('interactionCreate', async interaction => {
 				embeds: [ serverListEmbed ]
 			});
 		}else if (interaction.commandName === 'status') {
-			await interaction.deferReply();
+			//await interaction.deferReply();
 			
 			let port = interaction.options.get('port').value;
 			
@@ -247,7 +247,7 @@ client.on('interactionCreate', async interaction => {
 				});
 			}
 		}else if (interaction.commandName === 'clean') {
-			await interaction.deferReply();
+			//await interaction.deferReply();
 			
 			let count = CleanServers();
 			
@@ -256,7 +256,7 @@ client.on('interactionCreate', async interaction => {
 				ephemeral: true
 			});
 		}else if (interaction.commandName === 'stop') {
-			await interaction.deferReply();
+			//await interaction.deferReply();
 			
 			let port = interaction.options.get('port').value;
 			
