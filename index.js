@@ -38,22 +38,6 @@ client.on('interactionCreate', async interaction => {
 			
 			if(server.interaction) {
 				await server.interaction.deleteReply();
-				/*await server.interaction.editReply({
-					content: 'Server closed!',
-					ephemeral: true,
-					embeds: [ ],
-					components: [ ]
-				});*/
-			}
-			if(interaction) {
-				/*
-				await interaction.reply({
-					content: 'Server closed!',
-					ephemeral: true,
-					embeds: [ ],
-					components: [ ]
-				});
-				*/
 			}
 		}
 	} else if(interaction.customId == "announce") {
