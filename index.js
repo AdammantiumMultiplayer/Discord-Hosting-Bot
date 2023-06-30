@@ -25,7 +25,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isButton()) return;
   
 	if(interaction.customId == "close_server") {
-		await interaction.deferReply();
+		await interaction.deferUpdate();
 		
 		var server = FindServer(interaction.user);
 		
@@ -46,7 +46,6 @@ client.on('interactionCreate', async interaction => {
 				});*/
 			}
 			if(interaction) {
-				await interaction.deferUpdate();
 				/*
 				await interaction.reply({
 					content: 'Server closed!',
@@ -111,9 +110,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'host') {
-		await interaction.deferReply();
-		
-		await interaction.followUp({ content: "Okay, i will spin up a new server for you!",
+		await interaction.reply({ content: "Okay, i will spin up a new server for you!",
 											  embeds: [ waitEmbed ],
 											  ephemeral: true
 											});
