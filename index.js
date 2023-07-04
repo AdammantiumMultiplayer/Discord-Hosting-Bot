@@ -58,6 +58,7 @@ client.on('interactionCreate', async interaction => {
 								{ name: "Max-Players", value: '' + server.max_players, inline: true },
 								{ name: "Version",     value: '' + server.version,   inline: true },
 							)
+							.setThumbnail(interaction.user.displayAvatarURL())
 							.setTimestamp();
 		
 			const row = new ActionRowBuilder()
