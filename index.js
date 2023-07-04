@@ -32,13 +32,15 @@ client.on('interactionCreate', async interaction => {
 		if(server) {
 			await StopServer(interaction.user);
 			
+			/*
+			// Handled by the process end event handler
 			if(server.announce) {
 				server.announce.deleteReply();
 			}
 			
 			if(server.interaction) {
 				await server.interaction.deleteReply();
-			}
+			}*/
 		}
 	} else if(interaction.customId == "announce") {
 		await interaction.deferReply();

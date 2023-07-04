@@ -91,15 +91,14 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	server_proc.on('close', () => {
 		try {
 			if(entry.interaction) {
-				entry.interaction.deleteReply();
-				/*
-				entry.interaction.editReply({
+				await entry.interaction.editReply({
 					content: 'Server closed!',
 					ephemeral: true,
 					embeds: [ ],
 					components: [ ]
 				});
-				*/
+				
+				await entry.interaction.deleteReply();
 			}
 		}catch{}
 		try {
@@ -109,14 +108,14 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 					.setTitle("Server closed: " + entry.name)
 					.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
 					.setTimestamp();
-				entry.announce.deleteReply();
-				/*
-				entry.announce.editReply({
+				
+				await entry.announce.editReply({
 					content: 'Server closed.',
 					embeds: [ serverEmbed ],
 					components: [ ]
 				});
-				*/
+				
+				entry.announce.deleteReply();
 			}
 		}catch{}
 		if(serverlist.hasOwnProperty(entry.port)) {
