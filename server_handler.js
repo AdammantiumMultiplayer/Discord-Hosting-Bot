@@ -88,7 +88,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	
 	serverlist[use_port] = entry;
 	
-	server_proc.on('close', () => {
+	server_proc.on('close', async () => {
 		try {
 			if(entry.interaction) {
 				await entry.interaction.editReply({
