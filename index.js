@@ -11,13 +11,6 @@ client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-
-function sleep(ms) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, ms);
-  });
-}
-
 const waitEmbed = new EmbedBuilder()
 						.setColor(0x00cc75)
 						.setTitle('Starting a server...')
@@ -48,7 +41,7 @@ client.on('interactionCreate', async interaction => {
 			}*/
 		}
 	} else if(interaction.customId == "announce") {
-		await interaction.deferReply({ fetchReply: true });
+		const message = await interaction.deferReply({ fetchReply: true });
 		
 		var server = FindServer(interaction.user);
 		if(server) {
@@ -102,7 +95,7 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'host') {
-		await interaction.deferReply({ fetchReply: true });
+		const message = await interaction.deferReply({ fetchReply: true, ephemeral: true });
 		
 		await interaction.editReply({ content: "Okay, i will spin up a new server for you!",
 											  embeds: [ waitEmbed ],

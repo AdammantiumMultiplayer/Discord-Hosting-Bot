@@ -97,16 +97,12 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 					embeds: [ ],
 					components: [ ]
 				});
-				
-				await sleep(1000);
-				
-				await entry.interaction.deleteReply();
-				
-				await sleep(1000);
 			}
 		}catch(error){
 			console.error(error);
 		}
+		
+		
 		try {
 			if(entry.announce) {
 				const serverEmbed = new EmbedBuilder()
@@ -120,14 +116,31 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 					embeds: [ serverEmbed ],
 					components: [ ]
 				});
-				
-				await sleep(1000);
-				
+			}
+		}catch(error){
+			console.error(error);
+		}
+		
+		
+		await sleep(10000);
+		
+		
+		try {
+			if(entry.interaction) {
+				await entry.interaction.deleteReply();
+			}
+		}catch(error){
+			console.error(error);
+		}
+		try {
+			if(entry.announce) {
 				await entry.announce.deleteReply();
 			}
 		}catch(error){
 			console.error(error);
 		}
+		
+		
 		if(serverlist.hasOwnProperty(entry.port)) {
 			delete serverlist[entry.port];
 			
