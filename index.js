@@ -12,6 +12,11 @@ client.on('ready', () => {
 });
 
 
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
 
 const waitEmbed = new EmbedBuilder()
 						.setColor(0x00cc75)
@@ -43,7 +48,7 @@ client.on('interactionCreate', async interaction => {
 			}*/
 		}
 	} else if(interaction.customId == "announce") {
-		await interaction.deferReply();
+		await interaction.deferReply({ fetchReply: true });
 		
 		var server = FindServer(interaction.user);
 		if(server) {
@@ -77,13 +82,13 @@ client.on('interactionCreate', async interaction => {
 		
 			server.announce = interaction;
 			
-			await interaction.followUp({ 	
+			await interaction.editReply({ 	
 				content: '<@' + interaction.user.id + '> is hosting a server!',
 				embeds: [ serverEmbed ],
 				components: [ row ]
 			});
 		}else{
-			await interaction.followUp({
+			await interaction.editReply({
 				content: 'No server hosted.',
 				ephemeral: true,
 				embeds: [ ],
@@ -97,7 +102,9 @@ client.on('interactionCreate', async interaction => {
 	if (!interaction.isChatInputCommand()) return;
 
 	if (interaction.commandName === 'host') {
-		await interaction.reply({ content: "Okay, i will spin up a new server for you!",
+		await interaction.deferReply({ fetchReply: true });
+		
+		await interaction.editReply({ content: "Okay, i will spin up a new server for you!",
 											  embeds: [ waitEmbed ],
 											  ephemeral: true
 											});
