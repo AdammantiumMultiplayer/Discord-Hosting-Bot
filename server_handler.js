@@ -111,7 +111,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 					.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: 'https://www.nexusmods.com/bladeandsorcery/mods/6888' })
 					.setTimestamp();
 				
-				await entry.announce.editReply({
+				await entry.announce.edit({
 					content: 'Server closed.',
 					embeds: [ serverEmbed ],
 					components: [ ]
@@ -134,7 +134,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		}
 		try {
 			if(entry.announce) {
-				await entry.announce.deleteReply();
+				await entry.announce.delete();
 			}
 		}catch(error){
 			console.error(error);

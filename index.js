@@ -41,7 +41,7 @@ client.on('interactionCreate', async interaction => {
 			}*/
 		}
 	} else if(interaction.customId == "announce") {
-		const message = await interaction.deferReply({ fetchReply: true });
+		await interaction.deferUpdate();
 		
 		var server = FindServer(interaction.user);
 		if(server) {
@@ -69,24 +69,17 @@ client.on('interactionCreate', async interaction => {
 		
 			if(server.announce) {
 				try {
-					server.announce.deleteReply();
+					server.announce.delete();
 				} catch {}
 			}
-		
-			server.announce = interaction;
 			
-			await interaction.editReply({ 	
+			const message = await interaction.channel.send({ 	
 				content: '<@' + interaction.user.id + '> is hosting a server!',
 				embeds: [ serverEmbed ],
 				components: [ row ]
 			});
-		}else{
-			await interaction.editReply({
-				content: 'No server hosted.',
-				ephemeral: true,
-				embeds: [ ],
-				components: [ ]
-			});
+			
+			server.announce = message;
 		}
 	}
 });
