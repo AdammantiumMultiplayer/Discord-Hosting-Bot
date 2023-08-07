@@ -9,6 +9,7 @@ jobs:
   push:
     name: Push
     runs-on: ubuntu-latest
+    permissions: write-all
 
     steps:
     - name: Git checkout
