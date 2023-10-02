@@ -9,6 +9,7 @@ jobs:
   push:
     name: Push
     runs-on: ubuntu-latest
+    permissions: write-all
 
     steps:
     - name: Git checkout
@@ -29,4 +30,4 @@ jobs:
         platforms: linux/amd64
         push: true
         tags: |
-          ghcr.io/adammantium/ampbot
+          ghcr.io/adammantiummultiplayer/ampbot
