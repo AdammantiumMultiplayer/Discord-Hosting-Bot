@@ -3,9 +3,9 @@ const { token, clientId, default_version } = require('./config.json');
 
 const commands = [
 	new SlashCommandBuilder().setName('host').setDescription('Creates a server for you and your friends to connect to.')
-		.addStringOption(option =>
+		.addIntegerOption(option =>
 			option.setName("password")
-				.setDescription("Specify a password for players to be able to connect. (Default: None)")
+				.setDescription("Specify a password for players to be able to connect. (Default: None / Needs to be a number)")
 				.setRequired(false)
 		)
 		.addNumberOption(option =>
