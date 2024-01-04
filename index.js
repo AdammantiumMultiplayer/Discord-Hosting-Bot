@@ -101,7 +101,7 @@ client.on('interactionCreate', async interaction => {
 		
 		let passphrase = undefined;
 		if(pPassword) {
-			passphrase = pPassword;//.value.replaceAll(" ", "");
+			passphrase = pPassword.value;//.value.replaceAll(" ", "");
 		}
 		
 		let player_max = 4;
