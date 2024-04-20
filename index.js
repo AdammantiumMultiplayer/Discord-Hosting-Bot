@@ -142,7 +142,7 @@ client.on('interactionCreate', async interaction => {
 								.setColor(0x00cc75)
 								.setTitle('Server started')
 								.setAuthor({ name: 'Adammantium Multiplayer Mod', iconURL: 'https://devforce.de/img/icons/AMP.png', url: serverlistUrl })
-								.setDescription('A server has been started!')
+								.setDescription('A server has been started!\n**Important: This server is not hosted on your machine. It\'s hosted on my servers. Performance may vary depending on your distance to the server.**')
 								.addFields(
 									{ name: 'Name', 	   value: '' + server.name                                     },
 									{ name: 'Address', 	   value: '' + server.address, 	                  inline: true },
