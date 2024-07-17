@@ -65,10 +65,10 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		[
 			'--debug',
 			'AMP_Server.exe',
-			'-port ' + use_port,
-			'-max_players ' + max_players,
-			'-password ' + passphrase,
-			'-pvp ' + pvp_enabled
+			'-port', use_port,
+			'-max_players', max_players,
+			'-password', passphrase,
+			'-pvp', pvp_enabled
 		], {
 			//detached: true,
 			cwd: './serverfiles/' + version + "/",
