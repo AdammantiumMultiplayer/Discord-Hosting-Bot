@@ -32,6 +32,15 @@ const commands = [
 					{ name: 'Beta 3', 			 value: 'Beta3' },
 				)
 		)
+		.addStringOption(option =>
+			option.setName('pvp')
+				.setDescription('Change if PvP is enabled. (Default: Enabled)')
+				.setRequired(false)
+				.addChoices(
+					{ name: 'Enabled',  value: 'true' },
+					{ name: 'Disabled',  value: 'false' }
+				)
+		)
 		,
 	
 	new SlashCommandBuilder().setName('invite').setDescription('Invite others to join your server.'),

@@ -98,6 +98,7 @@ client.on('interactionCreate', async interaction => {
 		let pPassword   = interaction.options.get('password');
 		let pMaxPlayers = interaction.options.get('max_players');
 		let pVersion    = interaction.options.get('version');
+		let pPvP        = interaction.options.get('pvp');
 		
 		let passphrase = undefined;
 		if(pPassword) {
@@ -116,8 +117,13 @@ client.on('interactionCreate', async interaction => {
 		if(pVersion) {
 			selected_version = pVersion.value;
 		}
-								
-		var server = await StartServer(interaction.user, player_max, passphrase, selected_version);
+		
+		let pvp_enabled = true;
+		if(pPvP) {
+			pvp_enabled = pPvP.value;
+		}
+		
+		var server = await StartServer(interaction.user, player_max, passphrase, selected_version, pvp_enabled);
 		
 		if(server) {
 			server.interaction = interaction;
