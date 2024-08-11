@@ -29,7 +29,8 @@ const commands = [
 					{ name: '0.8.2 (Outdated)',  value: '0.8.2' },
 					{ name: 'Beta 1 (Outdated)', value: 'Beta1' },
 					{ name: 'Beta 2 (Outdated)', value: 'Beta2' },
-					{ name: 'Beta 3', 			 value: 'Beta3' },
+					{ name: 'Beta 3 (Outdated)', value: 'Beta3' },
+					{ name: 'Beta 4', 			 value: 'Beta4' },
 				)
 		)
 		.addStringOption(option =>
