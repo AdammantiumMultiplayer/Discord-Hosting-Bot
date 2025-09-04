@@ -1,4 +1,4 @@
-FROM debian:trixie-slim
+FROM node:iron-trixie-slim
 
 RUN apt-get update
 
