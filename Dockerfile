@@ -1,5 +1,7 @@
 FROM debian:trixie-slim
 
+RUN apt-get install git -y
+
 RUN git clone https://github.com/Adammantium/AMP-Discord-Bot.git /usr/src/app
 
 WORKDIR /usr/src/app
