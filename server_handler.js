@@ -18,7 +18,9 @@ function randomRange(min, max) {
 }
 
 module.exports.StartServer = async function(user, max_players, passphrase, version, pvp_enabled) {
-	var server_running = module.exports.FindServer(user.id);
+	var server_running = false;
+	// TODO Limit IP when user.id is not set
+	if(user && user.id) server_running = module.exports.FindServer(user.id);
 	if(server_running) {
 		if(!pidIsRunning(server_running.process.pid)) {
 			if(serverlist.hasOwnProperty(server_running.port)) {
@@ -58,7 +60,10 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	
 	if(!passphrase) passphrase = "";
 	
-	console.log("Starting server on port " + use_port + " for " + user.username);
+	if(user)
+		console.log("Starting server on port " + use_port + " for " + user.username);
+	else
+		console.log("Starting server on port " + use_port + " for API call");
 	
 	const server_proc = execFile(
 		'mono',
@@ -77,8 +82,8 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	);
 	
 	var entry = {
-		id:	     	 user.id,
-		name: 	 	 user.username + "'s Lobby",
+		id:	     	 (user ? user.id : ""),
+		name: 	 	 (user ? user.username : "API") + "'s Lobby",
 		address: 	 address,
 		port:	 	 use_port,
 		max_players: max_players,

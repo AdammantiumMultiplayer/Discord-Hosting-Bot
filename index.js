@@ -3,6 +3,7 @@ const { token, clientId, serverlistUrl, default_version } = require('./config.js
 const { servers, StartServer, StopServer, FindServer, CleanServers } = require("./server_handler");
 
 require('./commands.js')
+require('./api.js')
 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
