@@ -1,4 +1,4 @@
-FROM node:16
+FROM 20-trixie
 
 RUN git clone https://github.com/Adammantium/AMP-Discord-Bot.git /usr/src/app
 
