@@ -1,4 +1,4 @@
-FROM 20-trixie
+FROM debian:trixie-slim
 
 RUN git clone https://github.com/Adammantium/AMP-Discord-Bot.git /usr/src/app
 
