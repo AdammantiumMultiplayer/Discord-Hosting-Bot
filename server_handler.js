@@ -17,7 +17,7 @@ function randomRange(min, max) {
   return Math.round(Math.random() * (max - min) + min);
 }
 
-module.exports.StartServer = async function(user, max_players, passphrase, version, pvp_enabled) {
+module.exports.StartServer = async function(user, max_players, passphrase, version, pvp_enabled, map, mode) {
 	var server_running = false;
 	// TODO Limit IP when user.id is not set
 	if(user && user.id) server_running = module.exports.FindServer(user.id);
@@ -65,16 +65,24 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 	else
 		console.log("Starting server on port " + use_port + " for API call");
 	
+	parameters = [
+		'--debug',
+		'AMP_Server.exe',
+		'-port', use_port,
+		'-max_players', max_players,
+		'-password', passphrase,
+		'-pvp', pvp_enabled
+	]
+	if(map && mode) {
+		parameters.push("-map");
+		parameters.push(map);
+		parameters.push("-mode");
+		parameters.push(mode);
+	}
+
 	const server_proc = execFile(
 		'mono',
-		[
-			'--debug',
-			'AMP_Server.exe',
-			'-port', use_port,
-			'-max_players', max_players,
-			'-password', passphrase,
-			'-pvp', pvp_enabled
-		], {
+		parameters, {
 			//detached: true,
 			cwd: './serverfiles/' + version + "/",
 			//stdio: ['inherit', 'inherit', 'inherit']

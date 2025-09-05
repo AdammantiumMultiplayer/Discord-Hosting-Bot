@@ -31,9 +31,16 @@ app.listen(port, () => {
 app.get('/run_server', async (req, res) => {
     var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
 
+    var map = undefined;
+    var mode = undefined;
+    if(req.params.map && req.params.mode) {
+        map = req.params.map;
+        mode = req.params.mode;
+    }
+
     var fakeUser = { id: ip, username: ip }
 
-    var server = await StartServer(fakeUser, 10, "", default_version, true);
+    var server = await StartServer(fakeUser, 10, "", default_version, true, map, mode);
 
     var join_code = await request_join_code(server);
 
