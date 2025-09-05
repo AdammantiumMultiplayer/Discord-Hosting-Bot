@@ -79,7 +79,7 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		parameters.push("-mode");
 		parameters.push(mode);
 	}
-
+	console.log(parameters);
 	const server_proc = execFile(
 		'mono',
 		parameters, {

@@ -33,11 +33,11 @@ app.get('/run_server', async (req, res) => {
 
     var map = undefined;
     var mode = undefined;
-    if(req.params.map && req.params.mode) {
-        map = req.params.map;
-        mode = req.params.mode;
+    if(req.query.map && req.query.mode) {
+        map = req.query.map;
+        mode = req.query.mode;
     }
-
+    console.log(req);
     var fakeUser = { id: ip, username: ip }
 
     var server = await StartServer(fakeUser, 10, "", default_version, true, map, mode);
