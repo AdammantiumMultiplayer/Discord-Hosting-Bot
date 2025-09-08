@@ -1,5 +1,6 @@
 const { REST, Routes, SlashCommandBuilder, PermissionFlagsBits } = require('discord.js');
 const { token, clientId, default_version } = require('./config.json');
+const { versions } = require('./versions.json');
 
 const commands = [
 	new SlashCommandBuilder().setName('host').setDescription('Creates a server for you and your friends to connect to.')
@@ -18,19 +19,7 @@ const commands = [
 				.setDescription('Version for the server to start. (Default: ' + default_version + ')')
 				.setRequired(false)
 				.addChoices(
-					{ name: '0.6.0 (Outdated)',  value: '0.6.0' },
-					{ name: '0.6.1 (Outdated)',  value: '0.6.1' },
-					{ name: '0.7.0 (Outdated)',  value: '0.7.0' },
-					{ name: '0.7.1 (Outdated)',  value: '0.7.1' },
-					{ name: '0.7.3 (Outdated)',  value: '0.7.3' },
-					{ name: '0.7.9 (Outdated)',  value: '0.7.9' },
-					{ name: '0.8.0 (Outdated)',  value: '0.8.0' },
-					{ name: '0.8.1 (Outdated)',  value: '0.8.1' },
-					{ name: '0.8.2 (Outdated)',  value: '0.8.2' },
-					{ name: 'Beta 1 (Outdated)', value: 'Beta1' },
-					{ name: 'Beta 2 (Outdated)', value: 'Beta2' },
-					{ name: 'Beta 3 (Outdated)', value: 'Beta3' },
-					{ name: 'Beta 4', 			 value: 'Beta4' },
+					...versions
 				)
 		)
 		.addStringOption(option =>
