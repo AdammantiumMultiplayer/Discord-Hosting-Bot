@@ -61,8 +61,9 @@ async function request_join_code(server) {
 app.listen(port, () => {
    console.log(`API running on ${port}`)
 });
+
 app.get('/status', async (req, res) => {
-   console.log("Servers running: " + Object.keys(servers).length + " / " + max_servers);
+   res.send("Servers running: " + Object.keys(servers).length + " / " + max_servers);
 });
 
 app.get('/run_server', async (req, res) => {
