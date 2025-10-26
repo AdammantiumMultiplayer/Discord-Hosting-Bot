@@ -12,9 +12,10 @@
         { "name": "Beta 1 (Outdated)", "value": "Beta1" },
         { "name": "Beta 2 (Outdated)", "value": "Beta2" },
         { "name": "Beta 3 (Outdated)", "value": "Beta3" },
-        { "name": "Beta 4",            "value": "Beta4" }
+        { "name": "Beta 4 (Outdated)", "value": "Beta4" },
+        { "name": "Beta 5",            "value": "Beta5" }
     ],
     "beta_versions": [
-        { "name": "Beta 5",            "value": "Beta5" }
+        { "name": "Beta 6",            "value": "Beta6" }
     ]
 }
