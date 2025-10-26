@@ -1,4 +1,4 @@
-const { address, portStart, portEnd } = require('./config.json');
+const { address, portStart, portEnd, max_servers } = require('./config.json');
 const { spawn, execFile } = require('node:child_process');
 const { EmbedBuilder } = require('discord.js');
 
@@ -20,6 +20,12 @@ function randomRange(min, max) {
 module.exports.StartServer = async function(user, max_players, passphrase, version, pvp_enabled, map, mode) {
 	var server_running = false;
 	// TODO Limit IP when user.id is not set
+
+	if(serverlist.length >= max_servers) {
+		console.log("Server limit reached!");
+		return undefined;
+	}
+
 	if(user && user.id) server_running = module.exports.FindServer(user.id);
 	if(server_running) {
 		if(!pidIsRunning(server_running.process.pid)) {

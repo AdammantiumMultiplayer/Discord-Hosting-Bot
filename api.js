@@ -1,5 +1,5 @@
 const express = require('express');
-const { token, clientId, serverlistUrl, default_version, address } = require('./config.json');
+const { token, clientId, serverlistUrl, default_version, address, max_servers } = require('./config.json');
 const { servers, StartServer, StopServer, FindServer, CleanServers } = require("./server_handler");
 const { versions, beta_versions } = require("./versions");
 const fetch = require('node-fetch');
@@ -61,6 +61,9 @@ async function request_join_code(server) {
 app.listen(port, () => {
    console.log(`API running on ${port}`)
 });
+app.get('/status', async (req, res) => {
+   console.log("Servers running: " + Object.keys(servers).length + " / " + max_servers);
+});
 
 app.get('/run_server', async (req, res) => {
     var ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress
@@ -77,6 +80,12 @@ app.get('/run_server', async (req, res) => {
         res.send("0");
         return;
     }*/
+
+    if(Object.keys(servers).length > max_servers) {
+        res.send("The server is currently overloaded. Please try again later.");
+        return;
+    }
+
     var version = get_version_to_run(req.query.version);
 
 
