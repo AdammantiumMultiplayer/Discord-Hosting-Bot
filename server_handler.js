@@ -72,7 +72,6 @@ module.exports.StartServer = async function(user, max_players, passphrase, versi
 		console.log("Starting server on port " + use_port + " for API call");
 	
 	parameters = [
-		'--debug',
 		'AMP_Server.exe',
 		'-port', use_port,
 		'-max_players', max_players,
