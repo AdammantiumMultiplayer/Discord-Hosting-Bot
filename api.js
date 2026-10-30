@@ -71,9 +71,19 @@ app.get('/run_server', async (req, res) => {
 
     var map = undefined;
     var mode = undefined;
+    var pvp = true;
+    var max_players = 5;
     if(req.query.map && req.query.mode) {
         map = req.query.map;
         mode = req.query.mode;
+    }
+    if(req.query.pvp) {
+        pvp = req.query.pvp;
+    }
+    if(req.query.max_players) {
+        max_players = req.query.max_players;
+        if(max_players > 10)
+            max_players = 10;
     }
 
     // If we don't know the version, just exit
@@ -82,7 +92,7 @@ app.get('/run_server', async (req, res) => {
         return;
     }*/
 
-    if(Object.keys(servers).length > max_servers) {
+    if(Object.keys(servers).length >= max_servers) {
         res.send("The server is currently overloaded. Please try again later.");
         return;
     }
@@ -92,7 +102,7 @@ app.get('/run_server', async (req, res) => {
 
     var fakeUser = { id: ip, username: ip }
 
-    var server = await StartServer(fakeUser, 10, "", version, true, map, mode);
+    var server = await StartServer(fakeUser, max_players, "", version, pvp, map, mode);
 
     var join_code = await request_join_code(server);
 
