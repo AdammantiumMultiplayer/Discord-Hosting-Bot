@@ -13,10 +13,11 @@
         { "name": "Beta 2 (Outdated)", "value": "Beta2" },
         { "name": "Beta 3 (Outdated)", "value": "Beta3" },
         { "name": "Beta 4 (Outdated)", "value": "Beta4" },
-        { "name": "Beta 5",            "value": "Beta5" },
-        { "name": "Beta 6",            "value": "Beta6" }
+        { "name": "Beta 5 (Outdated)", "value": "Beta5" },
+        { "name": "Beta 6 (Outdated)", "value": "Beta6" },
+        { "name": "Beta 7",            "value": "Beta7" }
     ],
     "beta_versions": [
-        { "name": "Beta 7",            "value": "Beta7" }
+        { "name": "Beta 8",            "value": "Beta7" }
     ]
 }
